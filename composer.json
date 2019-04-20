@@ -1,0 +1,25 @@
+{
+    "name": "mdantas/expressive-cli",
+    "description": "This package is another tooling to expressive framework.",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^8.2@dev"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marcos Dantas",
+            "email": "marcos.adantas@hotmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "mdantas\\expressive-cli\\": "src/"
+        }
+    },
+    "bin": [
+        "bin/expressive-cli"
+    ]
+}
