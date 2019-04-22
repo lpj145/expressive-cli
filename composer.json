@@ -15,7 +15,6 @@
     "minimum-stability": "dev",
     "require": {
         "symfony/console": "^4.3@dev",
-        "mdantas/phinx-wrapper": "dev-master",
         "psr/container": "^1.0@dev",
         "zendframework/zend-expressive-tooling": "^1.2@dev"
     },
