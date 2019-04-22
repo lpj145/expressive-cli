@@ -1,16 +1,27 @@
 #!/usr/bin/env php
 <?php
 
-$autoloader = require __DIR__.'/../src/composer_autoload.php';
-
-if (!$autoloader()) {
-    die(
-        'You need to set up the project dependencies using the following commands:' . PHP_EOL .
-        'curl -sS https://getcomposer.org/installer | php' . PHP_EOL .
-        'php composer.phar install' . PHP_EOL
-    );
+$cwd = getcwd();
+if (is_dir($cwd . '/vendor')) {
+    echo "Using project autoloader based on current working directory\n";
+    chdir($cwd);
+    require 'vendor/autoload.php';
+} elseif (file_exists($a = __DIR__ . '/../../../autoload.php')) {
+    echo "Using project autoloader\n";
+    require $a;
+} elseif (file_exists($a = __DIR__ . '/../vendor/autoload.php')) {
+    echo "Using project autoloader relative to bin directory\n";
+    require $a;
+} elseif (file_exists($a = __DIR__ . '/../autoload.php')) {
+    echo "Using project autoloader relative to vendor directory\n";
+    require $a;
+} else {
+    fwrite(STDERR, 'Cannot locate autoloader; please run "composer install"' . PHP_EOL);
+    exit(1);
 }
 
-(new \mdantas\ExpressiveCli\ExpressiveApplication())
-    ->run()
-;
+$application = new \Symfony\Component\Console\Application();
+
+$application->add(new \mdantas\ExpressiveCli\Command\CreateAppCommand('create:app'));
+$application->setDefaultCommand('create:app', true);
+$application->run();

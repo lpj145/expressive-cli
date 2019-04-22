@@ -1,0 +1,8 @@
+#!/usr/bin/env php
+<?php
+
+require './vendor/autoload.php';
+$container = null;
+
+(new \mdantas\ExpressiveCli\ExpressiveApplication($container))
+->run();
